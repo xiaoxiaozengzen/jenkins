@@ -1,0 +1,78 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            choices: 'feature\nmaster\npercent10',
+            description: '选择要发布的分支,默认是feature',
+            name: 'deploy_branch'
+        )
+
+        choice(
+            choices: 'service\ncontroller\nadmin-web',
+            description: '选择要发布的服务,默认是controller',
+            name: 'deploy_service'
+        )
+
+    }
+
+    stages {
+        stage ("Git") {
+            steps {
+                  // Get some code from a GitHub repository
+                  //sh "echo test-auto-release"
+                  script {
+                      manager.addShortText("分支:"+manager.envVars['deploy_branch'])
+                      manager.addShortText("服务:"+manager.envVars['deploy_service'])
+                  }
+                  sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh git-jmucai ${deploy_branch}"'
+            }
+        }
+
+
+        stage ("Build") {
+            steps {
+                    // Run the maven build
+                    //sh "echo test-auto-release"
+                    sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh mvn-jmucai"'
+
+            }
+        }
+
+
+        stage ("Copy") {
+            steps {
+                  // Copy file to server
+                  script {
+                      if ( deploy_service == 'service') {
+                          sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh copy-jmucai service IP3 jmucai-hc-pro-core.pem"'
+                      } else if ( deploy_service == 'controller') {
+                          sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh copy-jmucai controller IP2 jmucai-hc-pro-core.pem"'
+                        } else if ( deploy_service == 'admin-web') {
+                          sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh copy-jmucai admin-web IP2 jmucai-hc-pro-core.pem"'
+                        }
+                        
+                  }
+
+            }
+        }
+
+
+        stage ("Issu") {
+            steps {
+                // Update
+                script {
+                  if ( deploy_service == 'service') {
+                    sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh issu-jmucai service IP3 jmucai-hc-pro-core.pem"'
+
+                  } else if ( deploy_service == 'controller') {
+                    sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh issu-jmucai controller IP2 jmucai-hc-pro-core.pem"'
+                    } else if ( deploy_service == 'admin-web') {
+                    sh 'ssh -i /opt/.scripts/jmu-hc-pro-jump.pem -o StrictHostKeyChecking=no root@IP "sh /opt/jenkins/opt/.scripts/test-auto-release.sh issu-jmucai admin-web IP2 jmucai-hc-pro-core.pem"'
+                    }
+                 }
+                }
+            }
+    }
+
+}
