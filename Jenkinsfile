@@ -9,7 +9,7 @@ pipeline {
                     del *.cpp
                     del *.exe
                     pause
-                    cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-git
+                    cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
                     dir *.cpp /b >nihao.txt
                     pause
                     set /p T=<nihao.txt
@@ -19,8 +19,8 @@ pipeline {
                     pause
                     g++ -o %T:~0,-4% %T%
                     pause
-                    copy %T:~0,-4%.exe C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-git
-                    cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-git
+                    copy %T:~0,-4%.exe C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
+                    cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
                     %T:~0,-4%.exe
                     del nihao.txt
                     pause
