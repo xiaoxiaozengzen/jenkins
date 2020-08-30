@@ -6,10 +6,9 @@ pipeline {
                 echo 'Hello World'
                 script{
                     bat'"cd C:\\Users\\Guangzeng Chen\\Desktop
-del *.cpp
-del *.exe
-pause
-"'
+                    del *.cpp
+                    del *.exe
+                    pause"'
                     }
                 }
             }
