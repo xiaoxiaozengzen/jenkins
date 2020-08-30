@@ -9,18 +9,18 @@ pipeline {
 del *.cpp
 del *.exe
 pause
-cd C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins.jenkins\workspace\jenkins-git
+cd C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins.jenkins\workspace\pipeline-git
 dir *.cpp /b >nihao.txt
 pause
 set /p T=<nihao.txt
-copy %T% C:\Users\GW00204700\Desktop
+copy %T% C:\Users\Guangzeng Chen\Desktop
 pause
-cd C:\Users\GW00204700\Desktop
+cd C:\Users\Guangzeng Chen\Desktop
 pause
 g++ -o %T:~0,-4% %T%
 pause
-copy %T:~0,-4%.exe C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins.jenkins\workspace\jenkins-git
-cd C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins.jenkins\workspace\jenkins-git
+copy %T:~0,-4%.exe C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins.jenkins\workspace\pipeline-git
+cd C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins.jenkins\workspace\pipeline-git
 %T:~0,-4%.exe
 del nihao.txt
 pause
