@@ -5,7 +5,7 @@ pipeline {
             steps { 
                 echo 'Hello World'
                 script{
-                    bat"'cd C:\Users\GW00204700\Desktop
+                    bat"'cd C:\Users\Guangzeng Chen\Desktop
 del *.cpp
 del *.exe
 pause
