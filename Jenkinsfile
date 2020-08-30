@@ -5,11 +5,10 @@ pipeline {
             steps { 
                 echo 'Hello World'
                 script{
-                    bat'"cd C:\\Users\\Guangzeng Chen\\Desktop
+                    bat'''cd "C:\\Users\\Guangzeng Chen\\Desktop"
                     del *.cpp
                     del *.exe
-                    pause"'
-                    }
+                    pause'''
                 }
             }
         }
