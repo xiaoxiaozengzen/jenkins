@@ -12,13 +12,13 @@ pipeline {
                     cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
                     dir *.cpp /b >nihao.txt
                     set /p T=<nihao.txt
-                    copy C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test\\%T% C:\\Users\\Guangzeng Chen\\Desktop
+                    copy %T% C:\\Users\\Guangzeng Chen\\Desktop
                     pause
                     cd C:\\Users\\Guangzeng Chen\\Desktop
                     pause
                     g++ -o %T:~0,-4% %T%
                     pause
-                    copy C:\\Users\\Guangzeng Chen\\Desktop\\%T:~0,-4%.exe C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
+                    copy %T:~0,-4%.exe C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
                     cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
                     %T:~0,-4%.exe
                     del nihao.txt
