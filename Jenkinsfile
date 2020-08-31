@@ -14,7 +14,7 @@ pipeline {
                     set /p T=<nihao.txt
                     copy %T% C:\\Users\\Guangzeng Chen\\Desktop
                     pause
-                    cd C:\\Users\\Guangzeng Chen\\Desktop
+                    cd "C:\\Users\\Guangzeng Chen\\Desktop"
                     pause
                     g++ -o %T:~0,-4% %T%
                     pause
