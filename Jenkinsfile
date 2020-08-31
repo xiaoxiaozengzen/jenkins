@@ -11,7 +11,6 @@ pipeline {
                     pause
                     cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
                     dir *.cpp /b >nihao.txt
-                    pause
                     set /p T=<nihao.txt
                     copy C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test\\%T% C:\\Users\\Guangzeng Chen\\Desktop
                     pause
