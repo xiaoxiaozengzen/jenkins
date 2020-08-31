@@ -12,7 +12,7 @@ pipeline {
                     cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\pipeline-test
                     dir *.cpp /b >nihao.txt
                     set /p T=<nihao.txt
-                    copy %T% C:\\Users\\Guangzeng Chen\\Desktop
+                    copy %T% "C:\\Users\\Guangzeng Chen\\Desktop"
                     pause
                     cd "C:\\Users\\Guangzeng Chen\\Desktop"
                     pause
